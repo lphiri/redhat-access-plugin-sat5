@@ -24,8 +24,10 @@ angular.module('sat5TelemetryApp', ['insights', 'ui.indeterminate', 'ui.ace'])
   InsightsConfigProvider.setFetchRelatedSolution(false);
   InsightsConfigProvider.setAllowExport(true);
   InsightsConfigProvider.setGetSystemStatus(true);
-  InsightsConfigProvider.setApiRoot('/' + SAT5_ROOT_URLS.PROXY + TELEMETRY_URLS.API_ROOT + '/');
-  InsightsConfigProvider.setOverviewShowSystem(
+  InsightsConfigProvider.setPlannerEnabled(false);
+  InsightsConfigProvider.setOverviewKey('overview-satellite6');
+  InsightsConfigProvider.setApiPrefix('/' + SAT5_ROOT_URLS.PROXY + TELEMETRY_URLS.API_ROOT + '/');
+  InsightsConfigProvider.setSystemShowSystem(
     function(system) {
       window.location = '/' + SAT5_ROOT_URLS.RHN + '/' +
         SYSTEM_DETAILS_PAGE_URLS.INSIGHTS + '?sid=' + system.remote_leaf;

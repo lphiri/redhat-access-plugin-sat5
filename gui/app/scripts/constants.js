@@ -33,8 +33,8 @@ angular.module('sat5TelemetryApp')
   'LOG': '/redhat_access/config/log'
 })
 .constant('TELEMETRY_URLS', {
-  'SYSTEMS_SUMMARY': '/redhat_access/r/insights/v1/systems?summary=true',
-  'API_ROOT': '/r/insights/v1'
+  'SYSTEMS_SUMMARY': '/redhat_access/r/insights/v3/systems?summary=true',
+  'API_ROOT': '/r/insights'
 })
 .constant('ADMIN_TABS', {
   'GENERAL': 'general',

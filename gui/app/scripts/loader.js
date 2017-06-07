@@ -266,7 +266,10 @@ if (RHA_INSIGHTS.UTILS.isOnInsightsEnabledPage()) {
   $.get('/redhat_access/config/general')
     .done(function(insightsConfig) {
       window.RHA_INSIGHTS.config = insightsConfig;
-
+      if (RHA_INSIGHTS.UTILS.isOnHelpPage()) {
+        $('#help-url-list').append('<li><a style="font-size:12pt" href="https://access.redhat.com/insights/info">Red Hat Insights Info</a><br/>Information about Red Hat Insights</li>');
+        $('#help-url-list').append('<li><a style="font-size:12pt" href="https://access.redhat.com/insights/getting-started/satellite/5/">Red Hat Insights Getting Started Guide</a><br/>Using and administering Red Hat Insights</li>');
+      }
       if (insightsConfig.enabled || RHA_INSIGHTS.UTILS.isOnAdminPage()) {
         if (RHA_INSIGHTS.UTILS.isOnSystemListPage()) {
           $('#spacewalk-content').prepend(
@@ -289,7 +292,7 @@ if (RHA_INSIGHTS.UTILS.isOnInsightsEnabledPage()) {
           } else if (RHA_INSIGHTS.UTILS.isOnInsightsContentPage()) {
             RHA_INSIGHTS.UTILS.bootstrapLinks();
             angular.bootstrap(document, ['sat5TelemetryApp']);
-          } else {
+          }else {
             RHA_INSIGHTS.UTILS.bootstrapLinks();
           }
         });
@@ -300,4 +303,3 @@ if (RHA_INSIGHTS.UTILS.isOnInsightsEnabledPage()) {
     });
 }
 })();
-

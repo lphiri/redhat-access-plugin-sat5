@@ -23,6 +23,7 @@ import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -73,14 +74,14 @@ public class InsightsApiClient {
       String requestContentType,
       String responseContentType) throws ConfigurationException, IOException {
 
-    HttpRequestBase request;
+  
     String fullPath = this.portalUrl + path;
-
-    if (method == Constants.METHOD_GET) {
-      request = new HttpGet(fullPath);
-    } else if (method == Constants.METHOD_POST) {
+    HttpRequestBase request = createRequest(method, fullPath);
+    if (request == null) {
+      throw new WebApplicationException(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+    }
+    if (method == Constants.METHOD_POST) {
         LOG.debug("content type: " + requestContentType);
-        request = new HttpPost(fullPath);
         request.addHeader(HttpHeaders.CONTENT_TYPE, requestContentType);
         if (requestBody != null) {
           if (requestBody instanceof HttpEntity) {
@@ -89,12 +90,18 @@ public class InsightsApiClient {
             ((HttpPost) request).setEntity(new ByteArrayEntity((byte[]) requestBody));
           }
         }
-    } else if (method == Constants.METHOD_DELETE) {
-      request = new HttpDelete(fullPath);
-    } else {
-      throw new WebApplicationException(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-    }
-
+    } 
+    if (method == Constants.METHOD_PUT) {
+        LOG.debug("content type: " + requestContentType);
+        request.addHeader(HttpHeaders.CONTENT_TYPE, requestContentType);
+        if (requestBody != null) {
+          if (requestBody instanceof HttpEntity) {
+            ((HttpPut) request).setEntity((HttpEntity) requestBody);
+          } else {
+            ((HttpPut) request).setEntity(new ByteArrayEntity((byte[]) requestBody));
+          }
+        }
+    } 
     RequestConfig proxyInfo = Util.loadProxyInfo();
     request.setConfig(proxyInfo);
     LOG.debug("Accept header: " + responseContentType);
@@ -114,5 +121,22 @@ public class InsightsApiClient {
     request.releaseConnection();
     return portalResponse;
   }
-}
+  
+  private HttpRequestBase createRequest(String httpMethod, String fullPath){
+    
+       if (Constants.METHOD_POST.equals(httpMethod)){
+           return new HttpPost(fullPath);
+       }
+       if (Constants.METHOD_PUT.equals(httpMethod)){
+           return new HttpPut(fullPath);
+       }
+       if (Constants.METHOD_DELETE.equals(httpMethod)){
+           return new HttpDelete(fullPath);
+       }
+       if (Constants.METHOD_GET.equals(httpMethod)){
+           return new HttpGet(fullPath);
+       }
+       return null;
 
+  }
+}

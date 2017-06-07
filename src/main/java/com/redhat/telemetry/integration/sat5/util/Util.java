@@ -306,7 +306,7 @@ public class Util {
 
     //read cert from manifest.zip
     String keyAndCert = CertAuth.getInstance().getKeyAndCert();
-    LOG.debug(keyAndCert);
+    //LOG.debug(keyAndCert);
     //end read cert
 
     //ssl mutual auth
