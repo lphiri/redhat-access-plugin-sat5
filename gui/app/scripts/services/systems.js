@@ -30,7 +30,7 @@ TELEMETRY_URLS) {
       if (alertDiv) {
         alertDiv.remove();
       }
-      this.systems = systems.systems;
+      this.systems = systems.resources;
       $rootScope.$broadcast(EVENTS.SYSTEMS_POPULATED);
     }));
     promise.error(function(error) {

@@ -32,6 +32,11 @@ angular.module('sat5TelemetryApp', ['insights', 'ui.indeterminate', 'ui.ace'])
       window.location = '/' + SAT5_ROOT_URLS.RHN + '/' +
         SYSTEM_DETAILS_PAGE_URLS.INSIGHTS + '?sid=' + system.remote_leaf;
     });
+  InsightsConfigProvider.setActionsShowSystem(
+      function(system) {
+        window.location = '/' + SAT5_ROOT_URLS.RHN + '/' +
+          SYSTEM_DETAILS_PAGE_URLS.INSIGHTS + '?sid=' + system.remote_leaf;
+    });
   InsightsConfigProvider.setGetReportsErrorCallback(
     function(data, status, headers, config) {
       if (status === 404) {

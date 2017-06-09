@@ -32,7 +32,7 @@ TELEMETRY_API_KEYS) {
     $scope.system = _.find(Sat5TelemetrySystems.systems, leafId);
     if (_.isEmpty($scope.system)) {
       $scope.system_status = $scope.STATUSES.UNKNOWN;
-    } else if (_.isEmpty($scope.system.reports)) {
+    } else if ($scope.system.report_count == 0) {
       $scope.system_status = $scope.STATUSES.GOOD;
     } else {
       $scope.system_status = $scope.STATUSES.BAD;

@@ -24,6 +24,7 @@ import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpHead;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -135,6 +136,9 @@ public class InsightsApiClient {
        }
        if (Constants.METHOD_GET.equals(httpMethod)){
            return new HttpGet(fullPath);
+       }
+       if (Constants.METHOD_HEAD.equals(httpMethod)){
+           return new HttpHead(fullPath);
        }
        return null;
 

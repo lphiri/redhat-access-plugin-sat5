@@ -421,19 +421,22 @@ module.exports = function (grunt) {
           src: ['generated/*']
         }, {
           expand: true,
-          cwd: 'bower_components/insights/release/images',
+          cwd: 'node_modules/insights-frontend/images',
           dest: '<%= yeoman.dist %>/images',
-          src: [
-            'bg_dount-hole-na.png',
-            'bg_chart-shadow.png',
-            'i_chart.png'
-          ]
+          src: ['*.{png,jpg,svg}']
         }, {
           expand: true,
           cwd: '<%= yeoman.app %>/fonts',
           dest: '<%= yeoman.dist %>/fonts',
           src: [
             '*.{ttf,woff}'
+          ]
+        },{
+          expand: true,
+          cwd: 'node_modules/insights-frontend/fonts',
+          dest: '<%= yeoman.dist %>/fonts',
+          src: [
+            '*.{ttf,woff,woff2,otf,eot,svg}'
           ]
         }]
       },

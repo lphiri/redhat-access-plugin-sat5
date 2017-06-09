@@ -23,6 +23,7 @@ public class Constants {
   public final static String METHOD_POST = "POST";
   public final static String METHOD_PUT = "PUT";
   public final static String METHOD_DELETE = "DELETE";
+  public final static String METHOD_HEAD = "HEAD";
 
   public static final String PROPERTIES_URL = "file:///etc/redhat-access/redhat-access-insights.properties";
   public static final String VERSION_RHEL6_SERVER = "6Server";

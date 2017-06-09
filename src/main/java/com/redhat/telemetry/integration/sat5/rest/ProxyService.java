@@ -313,6 +313,7 @@ public class ProxyService {
       if (pathTypeInt.equals(Constants.SYSTEM_REPORTS_PATH) && pathType.get("id") != null) {
         LOG.debug("Request is for an individual system's reports. GET machine ID from portal.");
         String leafId = pathType.get("id");
+        LOG.debug("Parsed leaf_id: " + leafId);
         String machineId = InsightsApiUtils.leafIdToMachineId(leafId);
         path = Constants.SYSTEMS_URL + machineId + "/" + Constants.REPORTS_URL;
         LOG.debug("MachineID Path: " + path);
